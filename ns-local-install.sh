@@ -28,6 +28,7 @@ else
   sudo apt-get install -y nodejs
 fi
 
+
 # prepare npm
 sudo apt-get install -y npm
 sudo npm cache clean -f
@@ -35,7 +36,7 @@ sudo npm install npm -g
 sudo npm install n -g
 
 # select matching node
-sudo n 4.5
+sudo n 4.6
 
 # install the mongodb 2.x from apt for now
 sudo apt-get install -y mongodb-server
@@ -61,8 +62,7 @@ git checkout dev
 ./setup.sh
 
 # put your config into it
-curl -o my.env https://raw.githubusercontent.com/DessertHunter/deploy-ns-local-raspi/master/my.env
-# curl -o my.env https://raw.githubusercontent.com/SandraK82/deploy-ns-local-raspi/master/my.env
+curl -o my.env https://raw.githubusercontent.com/SandraK82/deploy-ns-local-raspi/master/my.env
 
 # make autoboot
 cd
@@ -71,6 +71,7 @@ sudo mv nightscout /etc/init.d/nightscout
 sudo chmod +x /etc/init.d/nightscout
 sudo /etc/init.d/nightscout start
 sudo /etc/init.d/nightscout status
-sudo update-rc.d nightscout defaults
+sudo insserv -d nightscout
 
 echo "deploy nightscout on raspi done :)"
+echo "Dont forget to edit: /home/pi/cgm-remote-monitor/my.env"
